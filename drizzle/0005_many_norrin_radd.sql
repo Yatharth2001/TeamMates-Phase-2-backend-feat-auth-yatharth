@@ -1,0 +1,1 @@
+ALTER TABLE `players` ADD `image` varchar(500);

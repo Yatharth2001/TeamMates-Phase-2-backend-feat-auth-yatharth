@@ -1,0 +1,1 @@
+ALTER TABLE `players` MODIFY COLUMN `image` varchar(500) DEFAULT '';
