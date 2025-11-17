@@ -25,6 +25,12 @@ import playerStatsRouter from './api/stats/player-stats'
 import getPlayerStatsRouter from './api/stats/getPlayer-stats';
 import teamStatsRouter from './api/stats/team-stats';
 import getTeamStatsRouter from './api/stats/getTeam-stats';
+import getTeamTotalStatsRouter from './api/stats/getTeamTotalStats';
+import getRecentTeamStatsRouter from './api/stats/getRecentTeam-stats';
+
+// Announcements routes
+import addAnnouncementRouter from './api/announcements/addAnnouncements';
+import getAnnouncementsRouter from './api/announcements/getAnnouncements';
 
 const app = express();
 
@@ -61,10 +67,19 @@ app.use('/api/players', attendanceRouter);
 app.use('/api/players', editPlayerRouter);
 
 // ✅ Stats APIs
+app.use('/api/stats', getTeamTotalStatsRouter);
 app.use('/api/stats', playerStatsRouter);
 app.use('/api/stats', getPlayerStatsRouter);
 app.use('/api/stats', teamStatsRouter);
-app.use('/api/stats', getTeamStatsRouter);
+app.use('/api/stats', getRecentTeamStatsRouter); // More specific route first
+app.use('/api/stats', getTeamStatsRouter); // Parameterized route last
+
+
+// Announcements APIs
+
+
+app.use('/api/announcements', addAnnouncementRouter);
+app.use('/api/announcements', getAnnouncementsRouter);
 
 app.get('/api/me', async (req, res) => {
   const session = await auth.api.getSession({
