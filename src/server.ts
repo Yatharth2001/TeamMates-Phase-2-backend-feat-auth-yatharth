@@ -32,6 +32,12 @@ import getRecentTeamStatsRouter from './api/stats/getRecentTeam-stats';
 import addAnnouncementRouter from './api/announcements/addAnnouncements';
 import getAnnouncementsRouter from './api/announcements/getAnnouncements';
 
+// Email routes
+import sendEmailRouter from './api/emails/sendEmail.js';
+import getEmailsRouter from './api/emails/getEmails.js';
+import getEmailByIdRouter from './api/emails/getEmailById.js';
+
+
 const app = express();
 
 // ✅ Ensure uploads folder exists
@@ -80,6 +86,11 @@ app.use('/api/stats', getTeamStatsRouter); // Parameterized route last
 
 app.use('/api/announcements', addAnnouncementRouter);
 app.use('/api/announcements', getAnnouncementsRouter);
+
+// Email APIs
+app.use('/api/emails', sendEmailRouter);
+app.use('/api/emails', getEmailsRouter);
+app.use('/api/emails', getEmailByIdRouter);
 
 app.get('/api/me', async (req, res) => {
   const session = await auth.api.getSession({
