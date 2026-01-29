@@ -19,6 +19,8 @@ import addPlayerRouter from './api/players/addPlayer';
 import getPlayersRouter from './api/players/getPlayer';
 import attendanceRouter from './api/players/attendance';
 import editPlayerRouter from './api/players/updatePlayer.js';
+import playerDevelopmentRouter from './api/players/playerDevelopment.js';
+import updatePlayerDevelopmentRouter from './api/players/updatePlayerDevelopment.js';
 
 // stats routes
 import playerStatsRouter from './api/stats/player-stats'
@@ -36,6 +38,9 @@ import getAnnouncementsRouter from './api/announcements/getAnnouncements';
 import sendEmailRouter from './api/emails/sendEmail.js';
 import getEmailsRouter from './api/emails/getEmails.js';
 import getEmailByIdRouter from './api/emails/getEmailById.js';
+
+// Formations routes
+import formationsRouter from './api/formations/formations.js';
 
 
 const app = express();
@@ -72,6 +77,10 @@ app.use('/api/players', getPlayersRouter);
 app.use('/api/players', attendanceRouter);
 app.use('/api/players', editPlayerRouter);
 
+// ✅ Player Development APIs
+app.use('/api/player-development', playerDevelopmentRouter);
+app.use('/api/player-development', updatePlayerDevelopmentRouter);
+
 // ✅ Stats APIs
 app.use('/api/stats', getTeamTotalStatsRouter);
 app.use('/api/stats', playerStatsRouter);
@@ -91,6 +100,9 @@ app.use('/api/announcements', getAnnouncementsRouter);
 app.use('/api/emails', sendEmailRouter);
 app.use('/api/emails', getEmailsRouter);
 app.use('/api/emails', getEmailByIdRouter);
+
+// Formations APIs
+app.use('/api/formations', formationsRouter);
 
 app.get('/api/me', async (req, res) => {
   const session = await auth.api.getSession({
